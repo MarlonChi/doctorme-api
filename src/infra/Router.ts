@@ -3,10 +3,14 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import DoctorController from "@/application/controller/DoctorController";
+import PatientController from "@/application/controller/PatientController";
 export default class Router {
   app: express.Express;
 
-  constructor(readonly doctorController: DoctorController) {
+  constructor(
+    readonly doctorController: DoctorController,
+    readonly patientController: PatientController
+  ) {
     this.app = express();
     this.app.use(cors());
     this.app.use(helmet());
@@ -21,6 +25,7 @@ export default class Router {
     });
 
     this.app.get("/doctors", this.doctorController.listDoctor);
+    this.app.post("/patient", this.patientController.createPatient);
   }
 
   public start(port: number) {

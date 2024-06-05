@@ -11,25 +11,25 @@ A API deve garantir:
 - [ ] Garantir que a API tenha um tratamento de erros
 - [ ] Garantir que a API não pare quando algum erro for retornado
 - [ ] Garantir que a API valide qualquer payload recebido
-- [ ] Garantir que a API armazene senhas seguras
+- [x] Garantir que a API armazene senhas seguras
 - [ ] Garantir que a API isole as operações por casos de uso
 
 A API deve ter os seguintes casos de uso:
 
 - [ ] Listar médicos
   - [ ] Incluir no retorno a agenda de cada médico
-- [ ] Obter dados do médico
+- [x] Obter dados do médico
   - [ ] Garantir que o ID de um médico foi enviado na chamada - Request
-  - [ ] Garantir que o ID do médico existe
-  - [ ] Retornar os dados do médico com a agenda
-- [ ] Obter dados do paciente
+  - [x] Garantir que o ID do médico existe
+  - [x] Retornar os dados do médico com a agenda
+- [x] Obter dados do paciente
   - [ ] Garantir o acesso somente a usuários autenticados - Request
   - [ ] Garantir que o Telefone de um paciente foi enviado na chamada - Requesrt
-  - [ ] Garantir que o Telefone é de um paciente que existe
-  - [ ] Incluir no retorno os agendamentos
-- [ ] Criar conta do paciente
-  - [ ] Criar conta com nome, telefone e senha
-  - [ ] Garantir somente um usuário por telefone
+  - [x] Garantir que o Telefone é de um paciente que existe
+  - [x] Incluir no retorno os agendamentos
+- [x] Criar conta do paciente
+  - [x] Criar conta com nome, telefone e senha
+  - [x] Garantir somente um usuário por telefone
 - [ ] Fazer login do paciente
   - [ ] Garantir que o telefone é de um cadastro válido
 - [ ] Adicionar agendamento para o paciente
