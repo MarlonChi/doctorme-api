@@ -4,7 +4,11 @@ export default class DatabaseService {
   constructor(readonly connection: PrismaClient) {}
 
   listDoctor() {
-    return this.connection.doctor.findMany();
+    return this.connection.doctor.findMany({
+      include: {
+        agenda: true,
+      },
+    });
   }
 
   getDoctorById(id: number, includeAgenda: boolean = false) {
@@ -44,6 +48,41 @@ export default class DatabaseService {
         name,
         phone,
         userId,
+      },
+    });
+  }
+
+  getPatientById(id: number) {
+    return this.connection.patient.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  getAgendaById(id: number) {
+    return this.connection.agenda.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  updateAgenda(id: number, data: { available: boolean }) {
+    return this.connection.agenda.update({
+      where: {
+        id,
+      },
+      data,
+    });
+  }
+
+  createAppointment(patientId: number, doctorId: number, date: Date) {
+    return this.connection.appointment.create({
+      data: {
+        patientId,
+        doctorId,
+        date,
       },
     });
   }
