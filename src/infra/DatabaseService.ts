@@ -52,6 +52,12 @@ export default class DatabaseService {
     });
   }
 
+  getUserByPhone(phone: string) {
+    return this.connection.user.findUnique({
+      where: { phone },
+    });
+  }
+
   getPatientById(id: number) {
     return this.connection.patient.findUnique({
       where: {

@@ -30,6 +30,7 @@ export default class Router {
       "/patient/:patientId/appointment",
       this.patientController.createAppointment
     );
+    this.app.post("/authenticate", this.patientController.authenticate);
   }
 
   public start(port: number) {
