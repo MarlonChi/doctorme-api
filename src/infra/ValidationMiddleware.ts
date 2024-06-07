@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectSchema } from "joi";
+import { BadRequestError } from "./helpers/Errors";
+import { HttpStatusCode } from "./helpers/HttpStatusCode";
+import { responseErrorFormatter } from "./helpers/ErrorHandling";
+import { decodeFromBase64 } from "./helpers/SecurityHelper";
 
 // validar a requisição
 function validatePayload(schema: ObjectSchema, key: "body" | "params") {
@@ -9,7 +13,9 @@ function validatePayload(schema: ObjectSchema, key: "body" | "params") {
     if (error) {
       const message = "Invalid payload";
 
-      return res.status(400).json({ message, error: error.message });
+      return res
+        .status(HttpStatusCode.BAD_REQUEST)
+        .json({ message, error: error.message });
     }
 
     next();
@@ -27,3 +33,29 @@ export function validateParams(schema: ObjectSchema) {
 }
 
 // validar se o token de autenticação foi enviado
+export function isAuthenticated(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (!req.headers.authorization) {
+    const message = new BadRequestError("Missing authorization header");
+
+    return res
+      .status(HttpStatusCode.UNAUTHORIZED)
+      .json(responseErrorFormatter(message));
+  }
+
+  const token = req.headers.authorization.split(" ")[1];
+  const user: any = decodeFromBase64(token);
+
+  if (!user) {
+    const message = new BadRequestError("Invalid token");
+
+    return res
+      .status(HttpStatusCode.UNAUTHORIZED)
+      .json(responseErrorFormatter(message));
+  }
+
+  next();
+}

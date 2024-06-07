@@ -23,7 +23,7 @@ A API deve ter os seguintes casos de uso:
   - [x] Garantir que o ID do médico existe
   - [x] Retornar os dados do médico com a agenda
 - [x] Obter dados do paciente
-  - [ ] Garantir o acesso somente a usuários autenticados - Request
+  - [x] Garantir o acesso somente a usuários autenticados - Request
   - [x] Garantir que o Telefone de um paciente foi enviado na chamada - Request
   - [x] Garantir que o Telefone é de um paciente que existe
   - [x] Incluir no retorno os agendamentos
