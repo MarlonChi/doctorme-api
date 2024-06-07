@@ -34,6 +34,7 @@ model Doctor {
   state        String
   speciality   String
   bio          String
+  picture      String
   price        Float
   availability String
   experience   String
