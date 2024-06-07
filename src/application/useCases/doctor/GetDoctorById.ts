@@ -1,4 +1,5 @@
 import DatabaseService from "@/infra/DatabaseService";
+import { NotFoundError } from "@/infra/helpers/Errors";
 
 export default class GetDoctorByIdUseCase {
   constructor(readonly database: DatabaseService) {}
@@ -8,7 +9,7 @@ export default class GetDoctorByIdUseCase {
     const doctor = await this.database.getDoctorById(id, INCLUDE_AGENDA);
 
     if (!doctor) {
-      throw new Error("No doctor found.");
+      throw new NotFoundError("No doctor found.");
     }
 
     return doctor;

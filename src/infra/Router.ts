@@ -12,6 +12,7 @@ import {
   getDoctorByIdSchema,
   getPatientByPhoneSchema,
 } from "./ValidationSchemas";
+import { errorHandling } from "./helpers/ErrorHandling";
 export default class Router {
   app: express.Express;
 
@@ -25,6 +26,7 @@ export default class Router {
     this.app.use(express.json());
 
     this.setRoutes();
+    this.app.use(errorHandling);
   }
 
   private setRoutes() {
